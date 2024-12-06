@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report Details</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Report Detail -->
+    <div class="container my-5 w-75">
+      <h2 class="text-center mb-4">Report Details</h2>
+
+      <div class="card p-4">
+        <div class="row g-4 align-items-center">
+          <!-- Report Details Section -->
+          <div class="col-md-8">
+            <h4>Work Type: {{ report.work_type }}</h4>
+            <p><strong>Members Count:</strong> {{ report.members_count }}</p>
+            <p><strong>Floor Number:</strong> {{ report.floor_number }}</p>
+            <p>
+              <strong>Equipments Used:</strong> {{ report.equipments_used }}
+            </p>
+            <p><strong>Report:</strong> {{ report.report_details }}</p>
+          </div>
+          <!-- Image Section -->
+          {% if report.photos %}
+          <div class="col-md-4">
+            <img
+              src="{{ report.photos.url }}"
+              alt="Report Photo"
+              class="img-fluid rounded shadow"
+              style="
+                max-width: 100%;
+                height: auto;
+                object-fit: cover;
+                border: 2px solid #ddd;
+              "
+            />
+          </div>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

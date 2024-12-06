@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Page with Links</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      .shbuilder-heading {
+        font-family: "Georgia", serif;
+        font-weight: bold;
+        font-size: 2rem;
+        background: linear-gradient(90deg, #ff9800, #f57c00, #e65100);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <h1
+      class="shbuilder-heading display-4 text-center mt-3 text-decoration-underline"
+    >
+      Sri Sai Constructions
+    </h1>
+
+    <!-- Main Content -->
+    <div class="container text-center my-5">
+      <!-- Links Section -->
+      <div class="card p-4 mx-auto" style="max-width: 400px">
+        <div class="list-group mb-3">
+          <!-- Dynamic Site Links -->
+          {% for site in sites %}
+          <div
+            class="d-flex justify-content-between align-items-center list-group-item"
+          >
+            <a
+              href="{{ site.get_absolute_url }}"
+              class="text-decoration-none text-capitalize h4 text-dark"
+            >
+              {{ site.sitename }}
+            </a>
+            <a
+              href="{% url 'add_report' site.id %}"
+              class="btn btn-sm btn-success"
+              title="Add Report for {{ site.sitename }}"
+            >
+              <i class="bi bi-plus-circle"></i> Add Report
+            </a>
+          </div>
+          {% empty %}
+          <p class="text-danger">No sites available. Add a new one!</p>
+          {% endfor %}
+        </div>
+        <a href="add-site/" class="btn btn-success w-100 mb-3">
+          <i class="bi bi-plus-circle"></i> Add New Site
+        </a>
+      </div>
+
+      <!-- Report Section -->
+      <div class="mt-4">
+        <a
+          href="today-reports/"
+          class="btn bg-danger bg-gradient text-white mb-4"
+        >
+          View Today's All Sites Report
+        </a>
+        <br />
+        <a
+          href="{% url 'all_sites' %}"
+          class="btn bg-dark bg-gradient text-white"
+        >
+          View All Reports
+        </a>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

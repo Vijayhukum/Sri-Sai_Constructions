@@ -40,7 +40,7 @@ ROOT_URLCONF = 'shInfratech.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,7 +93,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://f6bf-110-235-224-235.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://f6bf-110-235-224-235.ngrok-free.app','https://srisai-constructions.onrender.com',]
 
 LOGOUT_REDIRECT_URL = '/'
 

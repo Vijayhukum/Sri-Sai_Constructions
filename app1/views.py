@@ -130,5 +130,3 @@ def login_view(request):
 
 
 
-def base(request):
-    return render(request, 'base.html')

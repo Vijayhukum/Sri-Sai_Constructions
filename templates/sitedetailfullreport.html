@@ -123,17 +123,34 @@
       document
         .getElementById("download-pdf-btn")
         .addEventListener("click", function () {
+          let sitename = document.getElementById("site_name").innerText;
           var element = document.getElementById("content-to-pdf");
 
           var options = {
-            margin: 1,
-            filename: `Total Report of ${sitename}.pdf`,
-            image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 4 },
-            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            margin: 0.5, // Reduced margin for better layout
+            filename: `Total Report of ${sitename}.pdf`, // Dynamic file name
+            image: { type: "jpeg", quality: 1.0 }, // High-quality images
+            html2canvas: { scale: 6, useCORS: true }, // High resolution with CORS
+            jsPDF: { unit: "in", format: "letter", orientation: "portrait" }, // Standard PDF layout
           };
 
-          html2pdf().from(element).set(options).save();
+          // Preload images to ensure they are included in the PDF
+          const images = element.querySelectorAll("img");
+          const promises = Array.from(images).map((img) => {
+            return new Promise((resolve) => {
+              if (img.complete) {
+                resolve(); // Image already loaded
+              } else {
+                img.onload = resolve; // Wait for the image to load
+                img.onerror = resolve; // Handle image loading errors gracefully
+              }
+            });
+          });
+
+          Promise.all(promises).then(() => {
+            // Generate PDF only after all images are loaded
+            html2pdf().from(element).set(options).save();
+          });
         });
     </script>
     <!-- Bootstrap Bundle JS -->
